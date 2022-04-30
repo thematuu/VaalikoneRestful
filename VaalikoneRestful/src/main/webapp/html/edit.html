@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello App Engine</title>
+  </head>
+<script>
+function readAllCandidates(){
+	var xmlhttp=new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+	  if (this.readyState == 4 && this.status == 200) {
+		  var jsoncandidatelist=this.responseText;
+		  //Add JSON string as a content of element resultall
+		  document.getElementById("resultall").innerHTML = jsoncandidatelist;
+		  var fishlist=JSON.parse(jsoncanditatelist);
+		  //print fish by function printOneFish.
+		  printAllCanditates(canditatelist);
+	  }
+	};
+	xmlhttp.open("GET", "/rest/service/getallcandidates", true);
+	xmlhttp.send();	
+}
+function printAllCandidates(list){
+	var s="<table border='1'>";
+	for (i in list){//or for (var i=0;i<list.length;i++){
+		s=s+"<tr>";
+		s=s+"<td>"+list[i].id;
+		s=s+"<td>"+list[i].etunimi;
+		s=s+"<td>"+list[i].sukunimi;
+		s=s+"<td>"+list[i].puolue;
+	}
+	s=s+"</table>";
+	document.getElementById("allfish").innerHTML=s;
+}
+</script>
+  <body>
+    <h1>Several Canditates returned</h1>
+    <button onclick='readAllCandidates();'>Read all Candidates</button>
+    <p id='resultall'></p>
+    <div id='allcanditates'>
+    </div>
+  </body>
+</html>
