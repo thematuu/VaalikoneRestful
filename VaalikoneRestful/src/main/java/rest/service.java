@@ -49,22 +49,22 @@ public class service {
 		return list;
 	}
 	
-	@PUT
-	@Path("/updatefish")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<candidate> updateCanditate(candidate candidate) {
-		EntityManager em=emf.createEntityManager();
-		em.getTransaction().begin();
-		candidate f=em.find(candidate.class, candidate.getId()); //select * from fish where id=fish.getId()
-		if (f!=null) {
-			em.merge(candidate);//The actual update line
-		}
-		em.getTransaction().commit();
-		//Calling the method readFish() of this service
-		List<candidate> list=readCandidate();		
-		return list;
-	}	
+//	@PUT
+//	@Path("/updatefish")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	public List<candidate> updateCanditate(candidate candidate) {
+//		EntityManager em=emf.createEntityManager();
+//		em.getTransaction().begin();
+//		candidate f=em.find(candidate.class, candidate.getId()); //select * from fish where id=fish.getId()
+//		if (f!=null) {
+//			em.merge(candidate);//The actual update line
+//		}
+//		em.getTransaction().commit();
+//		//Calling the method readFish() of this service
+//		List<candidate> list=readCandidate();		
+//		return list;
+//	}	
 	
 //	@GET
 //	@Path("/getallcandidates")
