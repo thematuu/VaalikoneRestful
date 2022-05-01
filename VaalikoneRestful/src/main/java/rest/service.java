@@ -40,13 +40,29 @@ public class service {
     public List<ehdokas> getAll(){
         return jpaDao.getEhdokas();
     }
-
+    
+    @GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getEhdokas/{id}")
+	public data.ehdokas getEhdokas(@PathParam("id") int number) {
+		List<ehdokas> list=(List<data.ehdokas>) getEhdokas(number);
+		try {
+			return list.get(number);
+		}
+		catch(IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+    
    @PUT
    @Path("/edit/{id}")
    @Produces(MediaType.APPLICATION_JSON)
    @Consumes(MediaType.APPLICATION_JSON)
-    public boolean editCandidate(ehdokas ehdokas) {
-	   	
+    public boolean editCandidate(@FormParam ("id")String etunimi, String sukunimi, String puolue) {
+	   	ehdokas ehdokas2 = new ehdokas();
+	   	ehdokas2.setEtunimi(etunimi);
+	   	ehdokas2.setSukunimi(sukunimi);
+	   	ehdokas2.setPuolue(puolue);
 		return jpaDao.editCandidate(ehdokas);
     }
 }
