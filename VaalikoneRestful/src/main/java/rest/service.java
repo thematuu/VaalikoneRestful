@@ -58,8 +58,9 @@ public class service {
    @Path("/edit/{id}")
    @Produces(MediaType.APPLICATION_JSON)
    @Consumes(MediaType.APPLICATION_JSON)
-    public boolean editCandidate(@FormParam ("id")String etunimi, String sukunimi, String puolue) {
+    public boolean editCandidate(@FormParam ("id")int id,String etunimi, String sukunimi, String puolue) {
 	   	ehdokas ehdokas2 = new ehdokas();
+	   	ehdokas2.setId(id);
 	   	ehdokas2.setEtunimi(etunimi);
 	   	ehdokas2.setSukunimi(sukunimi);
 	   	ehdokas2.setPuolue(puolue);

@@ -44,17 +44,20 @@ function printAllCandidate(list){
 }
     
 function getEhdokas(id){
-	var xmlhttp=new XMLHttpRequest();
-	xmlhttp.open("GET", "/rest/service/getEhdokas/"+id, true);
-	xmlhttp.send();
-	xmlhttp.onreadystatechange = function() {
-		"<form action='/edit/'"+id+"' method='PUT'>"
-		"<input type='text' name='etunimi' value=''>"
-		"<input type='text' name='sukunimi' value=''>"
-		"<input type='text' name='puolue' value=''>"
-		"<input type='submit' name='ok' value='OK'>"
-		"</form>"
-	}
+    var xmlhttp=new XMLHttpRequest();
+    xmlhttp.open("GET", "/rest/service/getEhdokas/"+id, true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function() {
+	var s="<form action='/edit/'"+id+"' method='PUT'>"
+		"<input type='hidden' name='id' value='"+id+"'>"
+        "<input type='text' name='etunimi' value=''>"
+        "<input type='text' name='sukunimi' value=''>"
+        "<input type='text' name='puolue' value=''>"
+        "<input type='submit' name='ok' value='OK'>"
+        "</form>"
+
+document.getElementById("candidate").innerHTML=s;
+    }
  }
 </script>
   <body>
