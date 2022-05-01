@@ -31,10 +31,7 @@ import data.ehdokas;
 public class service {
 	
 	private jpaDao jpaDao = null;
-	
-	public void init() {
-		jpaDao = new jpaDao("jdbc:mysql://localhost:3306/db_vaalikone", "root", "root");
-	}
+	ehdokas ehdokas;
 
 
     @GET
@@ -44,9 +41,12 @@ public class service {
         return jpaDao.getEhdokas();
     }
 
-//    @PUT
-//    @Path("/edit/{id}")
-//    public boolean editCandidate(@PathParam("id") int id) {
-//        return jpaDao.updateEhdokas(id);
-//    }
+   @PUT
+   @Path("/edit/{id}")
+   @Produces(MediaType.APPLICATION_JSON)
+   @Consumes(MediaType.APPLICATION_JSON)
+    public boolean editCandidate(ehdokas ehdokas) {
+	   	
+		return jpaDao.editCandidate(ehdokas);
+    }
 }

@@ -5,23 +5,22 @@
     <title>Hello App Engine</title>
   </head>
 <script>
-window.onload = readAllFish();
-function readAllFish(){
+window.onload = printAllCandidate();
+function printAllCandidate(){
     var xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-          var jsonfishlist=this.responseText;
+          var jsonCandidatelist=this.responseText;
           //Add JSON string as a content of element resultall
-         // document.getElementById("resultall").innerHTML = jsonfishlist;
-          var fishlist=JSON.parse(jsonfishlist);
-          //print fish by function printOneFish.
-          printAllFish(fishlist);
+         // document.getElementById("resultall").innerHTML = jsonCandidatelist;
+          var Candidatelist=JSON.parse(jsonCandidatelist);
+          PrintAllCandidate(Candidatelist);
       }
     };
     xmlhttp.open("GET", "/rest/service/getall", true);
     xmlhttp.send();    
 }
-function printAllFish(list){
+function printAllCandidate(list){
     var s="<table border='1'>";
     for (i in list){//or for (var i=0;i<list.length;i++){
         s=s+"<tr>";
@@ -29,18 +28,29 @@ function printAllFish(list){
         s=s+"<td>"+list[i].etunimi;
         s=s+"<td>"+list[i].sukunimi;
         s=s+"<td>"+list[i].puolue;
-        s=s+"<td> <button onclick='LIISÄÄFUNKTIOTÄHÄN'>EDIT</button>";
+        s=s+"<td> <button onclick='UpdateEhdokas("+list[i].id+")'>EDIT</button>";
         
     }
     s=s+"</table>";
     document.getElementById("allfish").innerHTML=s;
 }
+    
+function UpdateEhdokas(id){
+	var xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("PUT", "/rest/service/edit/"+id, true);
+	xmlhttp.send();
+	xmlhttp.onreadystatechange = function() {
+		readAllCandidate();
+	}
+}
+    
+    
 </script>
   <body>
-    <h1>Several fish returned</h1>
+    <h1>Candidates</h1>
     
     <p id='resultall'></p>
-    <div id='allfish'>
+    <div id='candidate'>
     </div>
   </body>
 </html>

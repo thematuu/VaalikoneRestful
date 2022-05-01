@@ -20,29 +20,8 @@ public class jpaDao {
 	private String pass;
     private static EntityManagerFactory emf;
     
-    public jpaDao(String url, String user, String pass) {
-		this.url=url;
-		this.user=user;
-		this.pass=pass;
-	}
     
-    public boolean getConnection() {
-		try {
-	        if (conn == null || conn.isClosed()) {
-	            try {
-	                Class.forName("com.mysql.jdbc.Driver").newInstance();
-	            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-	                throw new SQLException(e);
-	            }
-	            conn = DriverManager.getConnection(url, user, pass);
-	        }
-	        return true;
-		}
-		catch (SQLException e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
-	}
+
     
     private static EntityManager getEntityManager() {
         if (emf==null) {
@@ -59,8 +38,15 @@ public class jpaDao {
         return list;
     }
 
-    public static void updateEhdokas(int id) {
-        
-        
+    public static boolean editCandidate(ehdokas ehdokas) {
+    	EntityManager em=getEntityManager();
+    	if (em!=null) {
+    		em.getTransaction().begin();
+    		em.merge(ehdokas);
+    		em.getTransaction().commit();
+    		return true;
+    	}
+    	return false;
     }
+    
 }
