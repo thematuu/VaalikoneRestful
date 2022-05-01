@@ -36,6 +36,7 @@ public class service {
 
     @DELETE
     @Path("/delete/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public boolean deleteBook(@PathParam("id") int id) {
         return JpaDao.deleteEhdokas(id);
     }
