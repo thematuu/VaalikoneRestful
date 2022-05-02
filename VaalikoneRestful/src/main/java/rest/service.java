@@ -54,16 +54,11 @@ public class service {
 		}
 	}
     
-   @PUT
-   @Path("/edit/{id}")
+   @POST
+   @Path("/edit")
    @Produces(MediaType.APPLICATION_JSON)
    @Consumes(MediaType.APPLICATION_JSON)
-    public boolean editCandidate(@FormParam ("id")int id,String etunimi, String sukunimi, String puolue) {
-	   	ehdokas ehdokas2 = new ehdokas();
-	   	ehdokas2.setId(id);
-	   	ehdokas2.setEtunimi(etunimi);
-	   	ehdokas2.setSukunimi(sukunimi);
-	   	ehdokas2.setPuolue(puolue);
+    public boolean editCandidate(ehdokas ehdokas) {
 		return jpaDao.editCandidate(ehdokas);
     }
 }

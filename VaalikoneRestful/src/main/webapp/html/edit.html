@@ -36,29 +36,52 @@ function printAllCandidate(list){
         s=s+"<td>"+list[i].etunimi;
         s=s+"<td>"+list[i].sukunimi;
         s=s+"<td>"+list[i].puolue;
-        s=s+"<td> <button onclick=getEhdokas("+list[i].id+")'>Edit</button>";
+        s=s+"<td> <button onclick='getEhdokas("+list[i].id+")'>Edit</button>";
         
     }
     s=s+"</table>";
     document.getElementById("candidate").innerHTML=s;
 }
     
-function getEhdokas(id){
-    var xmlhttp=new XMLHttpRequest();
-    xmlhttp.open("GET", "/rest/service/getEhdokas/"+id, true);
-    xmlhttp.send();
-    xmlhttp.onreadystatechange = function() {
-	var s="<form action='/edit/'"+id+"' method='PUT'>"
-		"<input type='hidden' name='id' value='"+id+"'>"
-        "<input type='text' name='etunimi' value=''>"
-        "<input type='text' name='sukunimi' value=''>"
-        "<input type='text' name='puolue' value=''>"
-        "<input type='submit' name='ok' value='OK'>"
-        "</form>"
 
-document.getElementById("candidate").innerHTML=s;
+    
+    
+    function getEhdokas(id){
+        var s="<form>";
+        s=s+"<input type='hidden' name='id' value='"+id+"'>";
+        s=s+"First name <input type='text' name='etunimi' value=''>";
+        s=s+"Last name <input type='text' name='sukunimi' value=''>";
+        s=s+"Puolue <input type='text' name='puolue' value=''>";
+        s=s+"<input type='button' onclick='sendCandidate(this.form);' name='ok' value='OK'>";
+        s=s+"</form>";
+
+
+        document.getElementById("candidate").innerHTML=s;
+            }
+    
+    
+    function sendCandidate(form){
+    	var candidate=new Object();
+    	candidate.id=form.id.value;
+    	candidate.etunimi=form.etunimi.value;
+    	candidate.sukunimi=form.sukunimi.value;
+    	candidate.puolue=form.puolue.value;
+    	if (candidate.etunimi === "" || candidate.sukunimi === "" || candidate.puolue === "") {
+    		document.getElementById("resultall").innerHTML = "Form contains blank information!";
+    		readAllCandidate();
+    		return;
+    	}
+    	var jsonCandidate=JSON.stringify(candidate);
+    	document.getElementById("resultall").innerHTML = "Edited candidate: <br>" + "ID: " + candidate.id + "<br>" + "First name: " +  candidate.etunimi + "<br>" + "Last name: " + candidate.sukunimi + "<br>" + "Party: " + candidate.puolue;
+    	
+    	var xmlhttp=new XMLHttpRequest();
+    	
+    	xmlhttp.open("POST", "/rest/service/edit", true);
+    	xmlhttp.setRequestHeader("Content-type", "application/json");
+    	xmlhttp.send(jsonCandidate);
+    	readAllCandidate();
     }
- }
+    
 </script>
   <body>
     <h1>Candidates</h1>
