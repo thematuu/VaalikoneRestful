@@ -37,4 +37,15 @@ public class JpaDao {
         }
         return false;
     }
+    
+    public static boolean editCandidate(ehdokas ehdokas) {
+    	EntityManager em=getEntityManager();
+    	if (em!=null) {
+    		em.getTransaction().begin();
+    		em.merge(ehdokas);
+    		em.getTransaction().commit();
+    		return true;
+    	}
+    	return false;
+    }
 }
