@@ -160,6 +160,29 @@ body {
   background: #66FCF1;
 }
 
+button {
+	margin-top: 10px;
+	width: 100%;
+    border: none;
+    padding: 18px;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+    text-transform: uppercase;
+    background: #e8e9ec;
+    color: #0B0C10;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 0;
+    letter-spacing: 0.2px;
+    outline: 0;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+	
+}
+
+button:hover {
+  background: #66FCF1;
+}
+
 .grid-container-index {
   display: grid;
   column-gap: 20px;
@@ -410,5 +433,16 @@ input[type="radio"]:checked + label {
     font-size: 16px;
     padding-top: 10px;
     padding-bottom: 10px;
+  }
+  
+  p.admin {
+  	margin: 0 auto;
+    width: 25%;
+  	color: red;
+    padding: 10px;
+    font-size: 24px;
+    text-align: center;
+    border-radius: 10px;
+  
   }
 

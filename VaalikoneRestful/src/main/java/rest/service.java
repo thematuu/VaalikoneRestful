@@ -20,18 +20,27 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+
 import dao.JpaDao;
 import data.ehdokas;
 
 @Path("/service")
 public class service {
-	
 
     @GET
     @Path("/getall")
     @Produces(MediaType.APPLICATION_JSON)
     public List<ehdokas> getAll(){
-        return JpaDao.getEhdokas();
+              return JpaDao.getEhdokas();
+    }
+
+    
+   @POST
+   @Path("/edit")
+   @Produces(MediaType.APPLICATION_JSON)
+   @Consumes(MediaType.APPLICATION_JSON)
+    public boolean editCandidate(ehdokas ehdokas) {
+		return jpaDao.editCandidate(ehdokas);
     }
 
     @DELETE
