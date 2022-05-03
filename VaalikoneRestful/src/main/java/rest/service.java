@@ -15,44 +15,25 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import dao.Dao;
-import dao.jpaDao;
+
+import dao.JpaDao;
 import data.ehdokas;
-
-
 
 @Path("/service")
 public class service {
-	
-	private jpaDao jpaDao = null;
-	ehdokas ehdokas;
-
 
     @GET
     @Path("/getall")
     @Produces(MediaType.APPLICATION_JSON)
     public List<ehdokas> getAll(){
-        return jpaDao.getEhdokas();
+              return JpaDao.getEhdokas();
     }
-    
-    @GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getEhdokas/{id}")
-	public data.ehdokas getEhdokas(@PathParam("id") int number) {
-		List<ehdokas> list=(List<data.ehdokas>) getEhdokas(number);
-		try {
-			return list.get(number);
-		}
-		catch(IndexOutOfBoundsException e) {
-			return null;
-		}
-	}
+
     
    @POST
    @Path("/edit")
@@ -60,5 +41,12 @@ public class service {
    @Consumes(MediaType.APPLICATION_JSON)
     public boolean editCandidate(ehdokas ehdokas) {
 		return jpaDao.editCandidate(ehdokas);
+    }
+
+    @DELETE
+    @Path("/delete/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public boolean deleteBook(@PathParam("id") int id) {
+        return JpaDao.deleteEhdokas(id);
     }
 }

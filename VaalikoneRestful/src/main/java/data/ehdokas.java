@@ -63,4 +63,6 @@ public class ehdokas implements Serializable{
     public String toString() {
         return this.id+": "+this.etunimi+" "+this.sukunimi +" "+this.puolue;
     }
+
 }
+
