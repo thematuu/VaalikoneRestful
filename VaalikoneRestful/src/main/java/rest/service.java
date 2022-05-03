@@ -40,7 +40,7 @@ public class service {
    @Produces(MediaType.APPLICATION_JSON)
    @Consumes(MediaType.APPLICATION_JSON)
     public boolean editCandidate(ehdokas ehdokas) {
-		return jpaDao.editCandidate(ehdokas);
+		return JpaDao.editCandidate(ehdokas);
     }
 
     @DELETE
