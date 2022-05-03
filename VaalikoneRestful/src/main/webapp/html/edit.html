@@ -42,7 +42,8 @@ function printAllCandidate(list){
     
     
     function getEhdokas(id){
-        var s="<form>";
+    	var s="<p class='admin'>Editing candidate, ID: "+id+ "</p>"
+        s=s+"<form>";
         s=s+"<div class='grid-container-questions'>";
         s=s+"<div class='grid-item-questions'>";
         s=s+"<input type='hidden' name='id' value='"+id+"'>";
@@ -74,11 +75,14 @@ function printAllCandidate(list){
     	document.getElementById("resultall").innerHTML = "<p class='admin'>Edited candidate: <br>" + "ID: " + candidate.id + "<br>" + "First name: " +  candidate.etunimi + "<br>" + "Last name: " + candidate.sukunimi + "<br>" + "Party: " + candidate.puolue + "</p>";
     	
     	var xmlhttp=new XMLHttpRequest();
-    	
+    	xmlhttp.onreadystatechange = function() {
+    	      if (this.readyState == 4 && this.status == 200) {
+    	          readAllCandidate();
+    	      }
+    	    };
     	xmlhttp.open("POST", "/rest/service/edit", true);
     	xmlhttp.setRequestHeader("Content-type", "application/json");
     	xmlhttp.send(jsonCandidate);
-    	readAllCandidate();
     }
     
 </script>
