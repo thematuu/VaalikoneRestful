@@ -25,7 +25,7 @@ import data.ehdokas;
 
 @Path("/service")
 public class service {
-
+	
 
     @GET
     @Path("/getall")
