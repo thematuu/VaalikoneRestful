@@ -37,6 +37,7 @@ public class service {
     @Produces(MediaType.APPLICATION_JSON)
     public boolean addEhdokas(ehdokas ehdokas) {
         return JpaDao.addEhdokas(ehdokas);
+    }
 
     
    @POST
