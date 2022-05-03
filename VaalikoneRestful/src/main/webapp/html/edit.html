@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <title>Candidate Admin Page</title>
+  </head>
+<script>
+window.onload = readAllCandidate();
+function readAllCandidate(){
+    var xmlhttp=new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          var jsonCandidatelist=this.responseText;
+          //Add JSON string as a content of element resultall
+          //document.getElementById("resultall").innerHTML = jsonCandidatelist;
+          var Candidatelist=JSON.parse(jsonCandidatelist);
+          //print fish by function printOneFish.
+          printAllCandidate(Candidatelist);
+      }
+    };
+    xmlhttp.open("GET", "/rest/service/getall", true);
+    xmlhttp.send();    
+}
+function printAllCandidate(list){
+    var s="<div class='grid-container-candidate'>";
+    
+    for (i in list){//or for (var i=0;i<list.length;i++){
+        s=s+"<div class='grid-item-candidate'>";
+        s=s+"<p>ID: "+list[i].id; + "</p><br>"
+        s=s+"<p>First name: "+list[i].etunimi; + "</p><br>"
+        s=s+"<p>Last name: "+list[i].sukunimi; + "</p><br>"
+        s=s+"<p>Party: "+list[i].puolue; + "</p>"
+        s=s+"<td> <button onclick='getEhdokas("+list[i].id+")'>Edit</button></div>";
+        
+    }
+    s=s+"</div>";
+    document.getElementById("candidate").innerHTML=s;
+}
+    
+
+    
+    
+    function getEhdokas(id){
+    	var s="<p class='admin'>Editing candidate, ID: "+id+ "</p>"
+        s=s+"<form>";
+        s=s+"<div class='grid-container-questions'>";
+        s=s+"<div class='grid-item-questions'>";
+        s=s+"<input type='hidden' name='id' value='"+id+"'>";
+        s=s+"First name: <input type='text' name='etunimi' value=''><br>";
+        s=s+"Last name: <input type='text' name='sukunimi' value=''><br>";
+        s=s+"Puolue: <input type='text' name='puolue' value=''><br>";
+        s=s+"<input type='button' onclick='sendCandidate(this.form);' name='ok' value='OK'>";
+        s=s+"</div>";
+        s=s+"</div>";
+        s=s+"</form>";
+
+
+        document.getElementById("candidate").innerHTML=s;
+            }
+    
+    
+    function sendCandidate(form){
+    	var candidate=new Object();
+    	candidate.id=form.id.value;
+    	candidate.etunimi=form.etunimi.value;
+    	candidate.sukunimi=form.sukunimi.value;
+    	candidate.puolue=form.puolue.value;
+    	if (candidate.etunimi === "" || candidate.sukunimi === "" || candidate.puolue === "") {
+    		document.getElementById("resultall").innerHTML = "<p class='admin'>Form contains blank information!</p>";
+    		readAllCandidate();
+    		return;
+    	}
+    	var jsonCandidate=JSON.stringify(candidate);
+    	document.getElementById("resultall").innerHTML = "<p class='admin'>Edited candidate: <br>" + "ID: " + candidate.id + "<br>" + "First name: " +  candidate.etunimi + "<br>" + "Last name: " + candidate.sukunimi + "<br>" + "Party: " + candidate.puolue + "</p>";
+    	
+    	var xmlhttp=new XMLHttpRequest();
+    	xmlhttp.onreadystatechange = function() {
+    	      if (this.readyState == 4 && this.status == 200) {
+    	          readAllCandidate();
+    	      }
+    	    };
+    	xmlhttp.open("POST", "/rest/service/edit", true);
+    	xmlhttp.setRequestHeader("Content-type", "application/json");
+    	xmlhttp.send(jsonCandidate);
+    }
+    
+</script>
+  <body>
+  	
+    <h1>Candidates</h1>
+    
+    <p id='resultall'></p>
+    <div id='candidate'>
+    </div>
+  </body>
+</html>

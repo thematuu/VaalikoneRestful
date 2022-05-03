@@ -25,6 +25,7 @@ public class JpaDao {
         return list;
     }
 
+
     public static boolean addEhdokas(ehdokas ehdokas) {
         EntityManager em=getEntityManager();
         if (em!=null) {
@@ -35,5 +36,29 @@ public class JpaDao {
             return true;
         }
         return false;
+    }
+
+    public static boolean deleteEhdokas(int id) {
+        EntityManager em=getEntityManager();
+        ehdokas e=em.find(ehdokas.class, id);
+        if (e!=null) {
+            em.getTransaction().begin();
+            em.remove(e);
+            em.getTransaction().commit();
+            em.close();
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean editCandidate(ehdokas ehdokas) {
+    	EntityManager em=getEntityManager();
+    	if (em!=null) {
+    		em.getTransaction().begin();
+    		em.merge(ehdokas);
+    		em.getTransaction().commit();
+    		return true;
+    	}
+    	return false;
     }
 }

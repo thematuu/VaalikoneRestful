@@ -1,4 +1,5 @@
-/rest/
-/dao/
-/META-INF/
+
 /data/
+/rest/
+/META-INF/
+/dao/

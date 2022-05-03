@@ -9,8 +9,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -25,7 +25,6 @@ import data.ehdokas;
 @Path("/service")
 public class service {
 
-
     @GET
     @Path("/getall")
     @Produces(MediaType.APPLICATION_JSON)
@@ -38,5 +37,20 @@ public class service {
     @Produces(MediaType.APPLICATION_JSON)
     public boolean addEhdokas(ehdokas ehdokas) {
         return JpaDao.addEhdokas(ehdokas);
+
+    
+   @POST
+   @Path("/edit")
+   @Produces(MediaType.APPLICATION_JSON)
+   @Consumes(MediaType.APPLICATION_JSON)
+    public boolean editCandidate(ehdokas ehdokas) {
+		return JpaDao.editCandidate(ehdokas);
+    }
+
+    @DELETE
+    @Path("/delete/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public boolean deleteBook(@PathParam("id") int id) {
+        return JpaDao.deleteEhdokas(id);
     }
 }
