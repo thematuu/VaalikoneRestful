@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Candidate Admin Page</title>
+  </head>
+<script>
+window.onload = readAllCandidate();
+function readAllCandidate(){
+    var xmlhttp=new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          var jsonCandidatelist=this.responseText;
+          //Add JSON string as a content of element resultall
+          //document.getElementById("resultall").innerHTML = jsonCandidatelist;
+          var Candidatelist=JSON.parse(jsonCandidatelist);
+          //print fish by function printOneFish.
+  
+          printAllCandidate(Candidatelist);
+      }
+    };
+    xmlhttp.open("GET", "/rest/service/getall", true);
+    xmlhttp.send();    
+}
+function printAllCandidate(list){
+    var s="<table border='1'>";
+    s=s+"<tr>";
+    s=s+"<td> Id";
+    s=s+"<td> First Name";
+    s=s+"<td> Last Name";
+    s=s+"<td> Party";
+    s=s+"<td>";
+    
+    for (i in list){//or for (var i=0;i<list.length;i++){
+        s=s+"<tr>";
+        s=s+"<td>"+list[i].id;
+        s=s+"<td>"+list[i].etunimi;
+        s=s+"<td>"+list[i].sukunimi;
+        s=s+"<td>"+list[i].puolue;
+        s=s+"<td> <button onclick='DeleteEhdokas("+list[i].id+")'>Delete</button>";
+        
+    }
+    s=s+"</table>";
+    document.getElementById("candidate").innerHTML=s;
+}
+    
+function DeleteEhdokas(id){
+	var xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("DELETE", "/rest/service/delete/"+id, true);
+	xmlhttp.send();
+	xmlhttp.onreadystatechange = function() {
+		readAllCandidate();
+	}
+}
+
+
+</script>
+  <body>
+    <h1>Candidates</h1>
+    
+    <p id='resultall'></p>
+    <div id='candidate'>
+    </div>
+  </body>
+</html>
