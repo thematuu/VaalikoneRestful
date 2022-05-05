@@ -35,6 +35,58 @@ function readAllCandidate(){
     xmlhttp.open("GET", "/rest/service/getall", true);
     xmlhttp.send();    
 }
+
+function readAllCandidateSorted(x){
+    var xmlhttp=new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          var jsonCandidatelist=this.responseText;
+          //Add JSON string as a content of element resultall
+          //document.getElementById("resultall").innerHTML = jsonCandidatelist;
+          var Candidatelist=JSON.parse(jsonCandidatelist);
+          var CandidatelistSorted = null;
+          if (x == 1) {
+        	   CandidatelistSorted = Candidatelist.sort(function(a, b) {
+           	   return a.etunimi.localeCompare(b.etunimi);
+             });
+          }
+          else if (x == 2) {
+        	  CandidatelistSorted = Candidatelist.sort(function(a, b) {
+              	   return b.etunimi.localeCompare(a.etunimi);
+                });
+           }
+          else if (x == 3) {
+        	  CandidatelistSorted = Candidatelist.sort(function(a, b) {
+              	   return a.sukunimi.localeCompare(b.sukunimi);
+                });
+           }
+          else if (x == 4) {
+        	  CandidatelistSorted = Candidatelist.sort(function(a, b) {
+              	   return b.etunimi.localeCompare(a.etunimi);
+                });
+           }
+          else if (x == 5) {
+        	  CandidatelistSorted = Candidatelist.sort(function(a, b) {
+              	   return a.puolue.localeCompare(b.puolue);
+                });
+           }
+          else if (x == 6) {
+        	  CandidatelistSorted = Candidatelist.sort(function(a, b) {
+              	   return b.etunimi.localeCompare(a.etunimi);
+                });
+           }
+ 		  else {
+ 			 CandidatelistSorted = Candidatelist;
+              
+           }
+           printAllCandidate(CandidatelistSorted);
+      }
+    };
+    xmlhttp.open("GET", "/rest/service/getall", true);
+    xmlhttp.send();    
+}
+
+
 function printAllCandidate(list){
     var s="<div class='grid-container-admin'>";
     	s=s+"<div class='grid-container'>"
@@ -207,6 +259,20 @@ function printAllCandidate(list){
 	</form>
         </div>
 </div>
+
+<div class="dropdown">
+  <button class="dropbtn">Sort candidates</button>
+  <div class="dropdown-content">
+    <button onClick='readAllCandidateSorted(7)'>ID</button>
+    <button onClick='readAllCandidateSorted(1)'>First name ascending</button>
+    <button onClick='readAllCandidateSorted(2)'>First name descending</button>
+    <button onClick='readAllCandidateSorted(3)'>Last name ascending</button>
+    <button onClick='readAllCandidateSorted(4)'>Last name descending</button>
+    <button onClick='readAllCandidateSorted(5)'>Party ascending</button>
+    <button onClick='readAllCandidateSorted(6)'>Party descending</button>
+  </div>
+</div>
+
     
     
     <p id='resultall'></p>
