@@ -261,7 +261,7 @@ function printAllCandidate(list){
 </div>
 
 <div class="dropdown">
-  <button class="dropbtn">Sort candidates</button>
+  <button class="dropbtn" onClick='readAllCandidateSorted(7)'>Sort candidates</button>
   <div class="dropdown-content">
     <button onClick='readAllCandidateSorted(7)'>ID</button>
     <button onClick='readAllCandidateSorted(1)'>First name ascending</button>
