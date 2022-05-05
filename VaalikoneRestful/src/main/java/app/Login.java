@@ -44,8 +44,8 @@ public class Login extends HttpServlet {
 						System.out.println("No connection to database");
 					}
 
-					request.setAttribute("questionList", list);
-					RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminpage.jsp");
+//					request.setAttribute("questionList", list);
+					RequestDispatcher rd = request.getRequestDispatcher("/jsp/adminSelect.jsp");
 					rd.forward(request, response);
 
 				} else {
