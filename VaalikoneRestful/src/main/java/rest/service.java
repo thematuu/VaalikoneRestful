@@ -31,6 +31,13 @@ public class service {
     public List<ehdokas> getAll(){
         return JpaDao.getEhdokas();
     }
+    
+    @GET
+    @Path("/getallpuolue")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ehdokas> getAllPuolue(){
+        return JpaDao.getPuolue();
+    }
 
     @POST
     @Path("/add")
