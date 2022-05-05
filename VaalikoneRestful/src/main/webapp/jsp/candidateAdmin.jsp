@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="UTF-8"%>
+
+<%@ page import="app.Login" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,6 +9,14 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>Candidate Admin Page</title>
   </head>
+ <%
+if(session.getAttribute("currentSessionUser")==null)
+{
+response.sendRedirect("/admin.html");
+}
+else{
+}
+%>
 <script>
 window.onload = readAllCandidate();
 function readAllCandidate(){
@@ -43,7 +55,7 @@ function printAllCandidate(list){
     
     function getEhdokas(id){
     	var s="<p class='admin'>Editing candidate, ID: "+id+ "</p>"
-        s=s+"<form>";
+        s=s+"<form method='post'>";
         s=s+"<div class='grid-container-questions'>";
         s=s+"<div class='grid-item-questions'>";
         s=s+"<input type='hidden' name='id' value='"+id+"' required>";
@@ -123,19 +135,31 @@ function printAllCandidate(list){
         xmlhttp.send(jsonCandidate);
     }
 </script>
+<div class="header">
+        <a href="/index.html" class="logo">Election compass</a>
+        <div class="header-right">
+          <a href="/Logout">Logout</a>
+        </div>
+      </div>
   <body>
+  <h1>ADMIN PAGE TO MANAGE CANDIDATES</h1>
  <div class="grid-container-admin">
 <div class="grid-item-admin">
 <h2>Add Candidates!</h2>
-        <form>
+        <form method='post'>
     First Name: <input type='text' name='etunimi' value='' required><br>
     Last Name: <input type='text' name='sukunimi' value='' required><br>
-    Party: <input type='text' name='puolue' value='' required><br>
+	Party: <select name="puolue" id="puolue">
+	
+	<option value="Keskusta">Keskusta</option>
+	<option value="Sosialidemokraatit">Sosialidemokraatit</option>
+	<option value="Vihreät">Vihreät</option>
+	<option value="Kokoomus">Kokoomus</option><br>
 	<input type='submit' name='Add' value='Add' onclick='AddEhdokas(this.form);'>
 	</form>
         </div>
 </div>
-    <h1>Candidates</h1>
+    
     
     <p id='resultall'></p>
     <div id='candidate'>
