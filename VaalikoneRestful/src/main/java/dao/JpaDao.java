@@ -25,6 +25,12 @@ public class JpaDao {
         return list;
     }
 
+    public static List<ehdokas> getPuolue(){
+        EntityManager em=getEntityManager();
+        List<ehdokas> list=em.createQuery("select a from puolueet a").getResultList();
+        em.close();
+        return list;
+    }
 
     public static boolean addEhdokas(ehdokas ehdokas) {
         EntityManager em=getEntityManager();

@@ -19,6 +19,7 @@ else{
 %>
 <script>
 window.onload = readAllCandidate();
+window.onload = readAllParty();
 function readAllCandidate(){
     var xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -61,14 +62,8 @@ function printAllCandidate(list){
         s=s+"<input type='hidden' name='id' value='"+id+"' required>";
         s=s+"First name: <input type='text' name='etunimi' value='' required><br>";
         s=s+"Last name: <input type='text' name='sukunimi' value=''required ><br>";
-        s=s+"Party: <input type='text' name='puolue' value='' required><br>";
-        s=s+"<input type='submit' onclick='sendCandidate(this.form);' name='ok' value='OK'>";
-        s=s+"</div>";
-        s=s+"</div>";
-        s=s+"</form>";
-
-
-        document.getElementById("candidate").innerHTML=s;
+        s=s+"Party: <select name='puolue' id='puolue'>";
+        readAllParty2(s)
             }
     
     
@@ -134,6 +129,63 @@ function printAllCandidate(list){
         xmlhttp.setRequestHeader("Content-type", "application/json");
         xmlhttp.send(jsonCandidate);
     }
+    
+    function readAllParty(){
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var jsonPartylist=this.responseText;
+              //Add JSON string as a content of element resultall
+              //document.getElementById("resultall").innerHTML = jsonCandidatelist;
+              var Partylist=JSON.parse(jsonPartylist);
+              //print fish by function printOneFish.
+              printAllParty(Partylist);
+          }
+        };
+        xmlhttp.open("GET", "/rest/service/getallpuolue", true);
+        xmlhttp.send();   
+    }
+    function readAllParty2(s){
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var jsonPartylist=this.responseText;
+              //Add JSON string as a content of element resultall
+              //document.getElementById("resultall").innerHTML = jsonCandidatelist;
+              var Partylist=JSON.parse(jsonPartylist);
+              //print fish by function printOneFish.
+              printAllParty2(Partylist,s);
+          }
+        };
+        xmlhttp.open("GET", "/rest/service/getallpuolue", true);
+        xmlhttp.send();   
+    }
+    
+    function printAllParty(list){
+    	var s= s;
+        for (i in list){//or for (var i=0;i<list.length;i++){
+            s=s+ "<option value="+list[i].puolue +">"+list[i].puolue+"</option>";
+        }
+        
+     
+        
+		console.log(s)
+        document.getElementById("puolue").innerHTML=s;
+    }
+        
+    function printAllParty2(list,s){
+        
+        for (i in list){//or for (var i=0;i<list.length;i++){
+            s=s+ "<option value="+list[i].puolue +">"+list[i].puolue+"</option>";
+        }
+        s=s+"<input type='submit' onclick='sendCandidate(this.form);' name='ok' value='OK'>";
+        s=s+"</div>";
+        s=s+"</div>";
+        s=s+"</form id='zs'>";
+        document.getElementById("candidate").innerHTML=s;
+    }     
+        
+   
 </script>
 <div class="header">
         <a href="/index.html" class="logo">Election compass</a>
@@ -151,10 +203,6 @@ function printAllCandidate(list){
     Last Name: <input type='text' name='sukunimi' value='' required><br>
 	Party: <select name="puolue" id="puolue">
 	
-	<option value="Keskusta">Keskusta</option>
-	<option value="Sosialidemokraatit">Sosialidemokraatit</option>
-	<option value="Vihreät">Vihreät</option>
-	<option value="Kokoomus">Kokoomus</option><br>
 	<input type='submit' name='Add' value='Add' onclick='AddEhdokas(this.form);'>
 	</form>
         </div>
