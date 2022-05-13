@@ -1,5 +1,8 @@
 package data;
-
+/**
+ * Party object for jpa
+ *
+ */
 import java.io.Serializable;
 
 import javax.persistence.Entity;

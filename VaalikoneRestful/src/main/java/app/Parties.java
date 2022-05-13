@@ -17,7 +17,7 @@ import data.questions;
 import data.party;
 
 /**
- * Servlet implementation class Converter
+ * Servlet for parties
  */
 @WebServlet("/Parties")
 public class Parties extends HttpServlet {

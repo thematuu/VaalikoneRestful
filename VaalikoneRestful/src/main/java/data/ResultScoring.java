@@ -1,5 +1,8 @@
 package data;
-
+/**
+ * Score object
+ *
+ */
 public class ResultScoring implements java.lang.Comparable<ResultScoring>{
 	private int id;
 	private int TotalPoints;

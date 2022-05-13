@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
 import data.questions;
-
+/**
+ * servlet for deleting a question
+ *
+ */
 @WebServlet(
     name = "Delete",
     urlPatterns = {"/deleteQuestion"}

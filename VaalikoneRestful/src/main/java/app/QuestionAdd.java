@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
 import data.questions;
-
+/**
+ * servlet for adding a question
+ *
+ */
 @WebServlet(
     urlPatterns = {"/AddQuestion"}
 )

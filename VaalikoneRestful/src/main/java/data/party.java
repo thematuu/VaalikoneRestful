@@ -1,5 +1,8 @@
 package data;
-
+/**
+ * Party object
+ *
+ */
 public class party {
 private int id;
 private String parties;

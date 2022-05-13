@@ -1,5 +1,8 @@
 package data;
-
+/**
+ * Reads password from the database, returns the password
+ *
+ */
 public class candidate {
 	private int id;
   //muhan

@@ -1,5 +1,8 @@
 package data;
-
+/**
+ * Answer object
+ *
+ */
 public class answers {
 	private int id;
 	private String answer;

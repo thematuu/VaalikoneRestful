@@ -21,7 +21,7 @@ import data.candidate;
 import data.questions;
 
 /**
- * Servlet implementation class Converter
+ * servlet for answers
  */
 @WebServlet("/ShowAnswers")
 public class ShowAnswers extends HttpServlet {

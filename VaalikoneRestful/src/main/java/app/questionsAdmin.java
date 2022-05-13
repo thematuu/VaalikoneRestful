@@ -9,7 +9,9 @@ import data.questions;
 import data.MD5;
 import java.sql.*;
 import java.util.ArrayList;
-
+/**
+ * servlet for redirecting into adminpage with questions
+ */
 @WebServlet("/questionsAdmin")
 public class questionsAdmin extends HttpServlet {
 	private static Dao dao;
@@ -18,9 +20,6 @@ public class questionsAdmin extends HttpServlet {
 		dao = new Dao("jdbc:mysql://localhost:3306/db_vaalikone", "root", "root");
 	}
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

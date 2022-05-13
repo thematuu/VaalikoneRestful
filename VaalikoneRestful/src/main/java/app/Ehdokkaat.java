@@ -17,16 +17,14 @@ import data.questions;
 import data.candidate;
 
 /**
- * Servlet implementation class Converter
+ * servlet for candidates
  */
 @WebServlet("/Ehdokkaat")
 public class Ehdokkaat extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Dao dao=null;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
+	
 	public Ehdokkaat() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -37,10 +35,7 @@ public class Ehdokkaat extends HttpServlet {
 		dao=new Dao("jdbc:mysql://localhost:3306/db_vaalikone", "root", "root");
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		response.setContentType("text/plain");

@@ -19,7 +19,7 @@ import data.questions;
 import data.ResultScoring;
 
 /**
- * Servlet implementation class Converter
+ * Servlet for election compass
  */
 @WebServlet("/Vaalikone")
 public class Vaalikone extends HttpServlet {

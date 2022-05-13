@@ -9,7 +9,10 @@ import data.questions;
 import data.MD5;
 import java.sql.*;
 import java.util.ArrayList;
-
+/**
+ * Servlet for logging in as an admin
+ *
+ */
 @WebServlet("/Admin")
 public class Login extends HttpServlet {
 	private static Dao dao;

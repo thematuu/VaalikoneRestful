@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
 import data.questions;
-
+/**
+ * Servlet for editing a question
+ *
+ */
 @WebServlet(
     urlPatterns = {"/UpdateQuestion"}
 )

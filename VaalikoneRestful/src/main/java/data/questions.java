@@ -1,5 +1,8 @@
 package data;
-
+/**
+ * Questions object
+ *
+ */
 public class questions {
 	private int id;
 	private String question;

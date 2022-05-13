@@ -18,7 +18,10 @@ import java.sql.Connection;
 import data.answers;
 import data.party;
 import data.candidate;
-
+/**
+ * Model in MVC
+ *
+ */
 public class Dao {
 	private String url;
 	private String user;
@@ -31,6 +34,10 @@ public class Dao {
 		this.pass=pass;
 	}
 	
+	/**
+	 * connects to the database
+	 *
+	 */
 	@SuppressWarnings("deprecation")
 	public boolean getConnection() {
 		try {
@@ -49,6 +56,10 @@ public class Dao {
 			return false;
 		}
 	}
+	/**
+	 * Reads all questions from the database and saves them into an Arraylist that will be returned.
+	 *
+	 */
 	public ArrayList<questions> readAllQuestions() {
 		ArrayList<questions> list=new ArrayList<>();
 		try {
@@ -66,6 +77,10 @@ public class Dao {
 			return null;
 		}
 	}
+	/**
+	 * Reads password from the database, returns the password
+	 *
+	 */
 	public String readUser(String username) {
 		String f=null;
 		try {
@@ -82,7 +97,10 @@ public class Dao {
 			return null;
 		}
 	}
-	
+	/**
+	 * updates question by id to the database, returns the updated list.
+	 *
+	 */
 	public ArrayList<questions> updateQuestion(questions q) {
 		try {
 			System.out.println(q.getQuestion());
@@ -98,6 +116,10 @@ public class Dao {
 			return null;
 		}
 	}
+	/**
+	 * deletes question by id to the database, returns the updated list.
+	 *
+	 */
 	public ArrayList<questions> deleteQuestion(String id) {
 		try {
 			String sql="delete from kysymys where id=?";
@@ -111,6 +133,10 @@ public class Dao {
 		}
 	}
 	
+	/**
+	 * reads all candidates and returns them as an Arraylist
+	 *
+	 */
 	public ArrayList<candidate> showCandidates() {
 		ArrayList<candidate> list=new ArrayList<>();
 		try {
@@ -131,6 +157,10 @@ public class Dao {
 		}
 	}
 	
+	/**
+	 * reads all parties and returns them as an Arraylist
+	 *
+	 */
 	public ArrayList<party> showParties() {
 		ArrayList<party> list=new ArrayList<>();
 		try {
@@ -150,7 +180,10 @@ public class Dao {
 		}
 	}
 
-	
+	/**
+	 * saves a question to the database, returns updated list.
+	 *
+	 */
 	public ArrayList<questions> AddQuestion(String question) {
 		try {
 			String sql="INSERT INTO kysymys (kysymykset) values(?)";
@@ -164,7 +197,11 @@ public class Dao {
 		}
 
 	}
-
+	
+	/**
+	 * reads all candidates and returns them as an Arraylist
+	 *
+	 */
 	public ArrayList<candidate> readAllCandidates() {
 		ArrayList<candidate> list=new ArrayList<>();
 		try {
@@ -184,7 +221,11 @@ public class Dao {
 			return null;
 		}
 	}
-
+	
+	/**
+	 * reads all answers and returns them as an Arraylist
+	 *
+	 */
 	public ArrayList<answers> readAllAnswers() {
 		ArrayList<answers> list=new ArrayList<>();
 		try {
@@ -205,6 +246,10 @@ public class Dao {
 			return null;
 		}
 	}
+	/**
+	 * reads one answer from the database by eid(ehdokas id) and kid(kysymys id), returns the answer
+	 *
+	 */
 	public String readAnswer(String eid, String kid) {
 		String a=null;
 		try {

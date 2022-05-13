@@ -1,7 +1,10 @@
 package data;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
+/**
+ * MD5 hashing for admin login
+ *
+ */
 public class MD5 {
 	public static String crypt(String str) {
         if (str == null || str.length() == 0) {
