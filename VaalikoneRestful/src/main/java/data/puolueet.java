@@ -1,6 +1,6 @@
 package data;
 /**
- * Party object for jpa
+ * Party object for JPA
  *
  */
 import java.io.Serializable;
